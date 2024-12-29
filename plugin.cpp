@@ -23,7 +23,7 @@ float Hook_GetTickInterval()
 		if ( tickrate > 10 )
 			tickinterval = 1.0f / tickrate;
 	}
-	return tickinterval;
+	RETURN_META_VALUE(MRES_SUPERCEDE, tickinterval);
 }
 
 class TickRatePlugin : public ISmmPlugin
