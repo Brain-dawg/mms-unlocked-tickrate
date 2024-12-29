@@ -14,7 +14,7 @@ HL2SDK_L4D2 = hl2sdk-l4d2
 HL2SDK_CSGO = hl2sdk-csgo
 MMSOURCE19 = metamod-source
 ENGINE ?= orangeboxvalve
-TICK_RATE ?= 125
+TICK_RATE ?= 0 # overwritten by command line
 
 #####################################
 ### EDIT BELOW FOR OTHER PROJECTS ###
@@ -32,7 +32,7 @@ GCC4_FLAGS = -fvisibility=hidden -fvisibility-inlines-hidden
 DEBUG_FLAGS = -g -ggdb3 -D_DEBUG
 CPP = g++
 CPP_OSX = clang
-CFLAGS += -DTICK_RATE=$(TICK_RATE)
+# CFLAGS += -DTICK_RATE=$(TICK_RATE)
 
 ##########################
 ### SDK CONFIGURATIONS ###

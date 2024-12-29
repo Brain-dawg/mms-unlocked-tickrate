@@ -1,4 +1,5 @@
 #include <ISmmPlugin.h>
+#include "tier0/icommandline.h"
 
 PLUGIN_GLOBALVARS();
 SH_DECL_HOOK0(IServerGameDLL, GetTickInterval, const, 0, float);
@@ -11,9 +12,18 @@ SH_DECL_HOOK0(IServerGameDLL, GetTickInterval, const, 0, float);
 # endif
 #endif
 
+//normally skips TF2
 float Hook_GetTickInterval()
 {
-    RETURN_META_VALUE(MRES_SUPERCEDE, TICK_INTERVAL);
+	float tickinterval = DEFAULT_TICK_INTERVAL;
+	// override if tick rate specified in command line
+	if ( CommandLine()->CheckParm( "-tickrate" ) )
+	{
+		float tickrate = CommandLine()->ParmValue( "-tickrate", 0 );
+		if ( tickrate > 10 )
+			tickinterval = 1.0f / tickrate;
+	}
+	return tickinterval;
 }
 
 class TickRatePlugin : public ISmmPlugin
